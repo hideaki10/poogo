@@ -1,11 +1,12 @@
 package parser
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/PuerkitoBio/goquery"
 )
+
+var name, price, url string
 
 type Viemo struct {
 	Url string
@@ -35,47 +36,20 @@ func (vi *Viemo) GetVideoInfo() (*VideoInfo, error) {
 		return nil, err
 	}
 
-	// doc.Find("div.buy_list > div.nayose > div.nayose_head > h2.link > p > a").Each(func(i int, s *goquery.Selection) {
-
-	// 	log.Println(s.Text())
-	// })
 	doc.Find("div.buy_list > div.nayose").Each(func(i int, s *goquery.Selection) {
-		log.Println(s.Attr("data-name"))
-		log.Println(s.Attr("data-price"))
+		name, _ = s.Attr("data-name")
+		price, _ = s.Attr("data-price")
 	})
 	doc.Find("div.buy_list > div.nayose > div.nayose_head > div.itemBody > div.clearfix > div.itemImageContent > div.subImages > p.subImage > a.selected > img").Each(func(i int, s *goquery.Selection) {
-		log.Println(s.Attr("data"))
+		url, _ = s.Attr("data")
 
 	})
-	//head := doc.Find("head")
 
-	// head.Find("meta").Each(func(i int, s *goquery.Selection) {
-	// 	if propetry, _ := s.Attr("property"); propetry == "og:title" {
-	// 		title, _ := s.Attr("content")
-	// 		fmt.Println(title)
-	// 	}
+	videoInfo := VideoInfo{}
+	videoInfo.Name = name
+	videoInfo.Price = price
+	videoInfo.Url = url
 
-	// 	fmt.Println("noting")
-	// })
+	return &videoInfo, nil
 
-	// resultBytes, err := ioutil.ReadAll(resp.Body)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	//fmt.Println(resultBytes)
-	//html := string(resultBytes)
-	//pattern := `"title":".*","tag"`
-
-	//compile := regexp.MustCompile(pattern)
-	//matches := compile.FindStringSubmatch(html)
-
-	// for _, match := range matches {
-	// 	fmt.Println(match)
-	// }
-
-	//log.Println(string(resultBytes))
-
-	return &VideoInfo{}, nil
-
-	// return nil, nil
 }
