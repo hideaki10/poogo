@@ -49,6 +49,7 @@ func Download(filename, url string, header http.Header) error {
 		io.Copy(file, response.Body)
 	}()
 	br.ShowProgress()
+
 	// compare file size
 	fileInfo, err := os.Stat(filename)
 	if err != nil {

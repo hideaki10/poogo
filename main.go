@@ -32,6 +32,8 @@ func main() {
 	header := http.Header{}
 	header.Add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36")
 
+	fmt.Println(videoInfo.Name, videoInfo.Price, videoInfo.Url)
+
 	err = download.Download(videoInfo.Name, videoInfo.Url, header)
 	if err != nil {
 		log.Fatal("download failed")

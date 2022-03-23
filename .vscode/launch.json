@@ -8,8 +8,11 @@
             "name": "Launch Package",
             "type": "go",
             "request": "launch",
-            "mode": "auto",
-            "program": "${fileDirname}"
+            "mode": "debug",
+            "program": "/home/qian/Developer/poogo",
+            "args": [
+                "https://myhome.nifty.com/chuko/mansion/kanto/tokyo/itabashiku/"
+            ],
         }
     ]
 }
